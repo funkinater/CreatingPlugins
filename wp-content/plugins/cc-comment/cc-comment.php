@@ -43,7 +43,10 @@ function cccomm_option_page() {
 }
 
 function cccomm_plugin_menu() {
-    add_options_page('CC Comments Option', 'CC Comments', 'manage_options', 'cc-comments-plugin', 'cccomm_option_page');
+    //add_options_page('CC Comments Option', 'CC Comments', 'manage_options', 'cc-comments-plugin', 'cccomm_option_page');
+    
+    /* Add a menu item in the admin panel */
+    add_menu_page('CC Comments Option', 'CC Comments', 'manage_options', 'cc-comments-plugin', 'cccomm_option_page');
 }
 
 add_action('admin_menu', 'cccomm_plugin_menu');
