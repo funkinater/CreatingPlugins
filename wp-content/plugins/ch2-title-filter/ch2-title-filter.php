@@ -7,26 +7,29 @@
  * Version: 1.0
  */
 
-add_filter('wp_title','ch2tf_title_filter');
+add_filter('document_title_parts','my_title_filter');
+add_filter('the_content', 'mess_with_the_content');
 
-function ch2tf_title_filter($title) {
-    //Select new title based on item type
-    if (is_front_page()) {
-        $new_title = 'Front Page >> ';
+function mess_with_the_content($content) {
+    $new_content = "WARNING WARNING WARNING " . $content;
+    return $new_content;
+}
+
+function my_title_filter($title) {
+
+    if(is_front_page()) {
+        $new_title['title'] = "Front Page >> ";
     } elseif (get_post_type() == 'page') {
-        $new_title = 'Page >> ';
+        $new_title['title'] = "Page >> ";
     } elseif (get_post_type() == 'post') {
-        $new_title = 'Post >> ';
+        $new_title['title'] = "Post >> ";
     }
-    //Append previous title to title prefix
     if (isset($new_title)) {
-        $new_title .= $title;
-
-        //Return new complete title
+        $new_title['title'] .= $title['title'];
         return $new_title;
     } else {
-        return $new_title;
+        return $title;
     }
 }
 
-?>
+    ?>
